@@ -21,10 +21,14 @@ services:
       - database
     ports:
       - "80"
+    environment:
+      # 환경 변수 (Dokploy에서 설정)
+      MW_DB_PASSWORD: ${MW_DB_PASSWORD:-mediawiki_password}
+      MW_SECRET_KEY: ${MW_SECRET_KEY:-73861deaa453b9a835d86856b8bb3c34574d70a9a659fa4504b8a6c86f2aeab4}
+      MW_UPGRADE_KEY: ${MW_UPGRADE_KEY:-a4f5f705a3ac0ecf}
     volumes:
       - mw_images:/var/www/html/images
-      # LocalSettings.php - 로컬 개발용 (프로덕션에서는 주석 처리)
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php
     networks:
       - wiki-internal
       - dokploy-network
