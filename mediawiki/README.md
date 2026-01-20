@@ -8,7 +8,7 @@ docker-compose up -d
 ```
 
 2. MediaWiki 접속:
-- URL: http://localhost:8080
+- URL: http://localhost:5050
 - Admin 계정: admin / admin_password
 
 3. LocalSettings.php 설정:
@@ -26,10 +26,10 @@ docker-compose up -d
 
 ```bash
 # 페이지 조회
-curl "http://localhost:8080/api.php?action=query&titles=Main_Page&format=json"
+curl "http://localhost:5050/api.php?action=query&titles=Main_Page&format=json"
 
 # 검색
-curl "http://localhost:8080/api.php?action=opensearch&search=artist&format=json"
+curl "http://localhost:5050/api.php?action=opensearch&search=artist&format=json"
 ```
 
 ## 중지

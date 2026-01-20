@@ -73,11 +73,16 @@ cp .env.example .env
 # 2. 시스템 시작
 docker-compose up -d
 
-# 3. 접속
+# 3. 접속 (로컬 개발)
 # - Frontend: http://localhost:3000
 # - Backend API: http://localhost:8000/docs
-# - MediaWiki: http://localhost:8080
+# - MediaWiki: http://localhost:5050
 ```
+
+### 프로덕션 환경
+- **Frontend**: https://wiki.jrai.space
+- **Backend API**: https://api-wiki.jrai.space
+- **MediaWiki**: https://okidokiwiki.jrai.space
 
 **자세한 내용은 [Quick Start Guide](./docs/quick-start.md)를 참조하세요.**
 

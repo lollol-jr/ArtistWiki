@@ -192,12 +192,14 @@ CREATE TABLE works (
 ## Environment Variables
 
 ### Backend (.env)
+
+**로컬 개발:**
 ```bash
 # Database
 DATABASE_URL=postgresql://user:password@localhost:15436/artistwiki
 
 # MediaWiki
-MEDIAWIKI_API_URL=http://localhost:8080/api.php
+MEDIAWIKI_API_URL=http://localhost:5050/api.php
 MEDIAWIKI_BOT_USERNAME=bot@artistwiki
 MEDIAWIKI_BOT_PASSWORD=your-bot-password
 
@@ -210,10 +212,37 @@ SECRET_KEY=your-secret-key
 DEBUG=True
 ```
 
+**프로덕션 (Dokploy):**
+```bash
+# Database
+DATABASE_URL=postgresql://artistwiki_user:password@artistwiki-db:5432/artistwiki
+
+# MediaWiki
+MEDIAWIKI_API_URL=https://okidokiwiki.jrai.space/api.php
+MEDIAWIKI_BOT_USERNAME=bot@artistwiki
+MEDIAWIKI_BOT_PASSWORD=your-bot-password
+
+# AI
+OPENAI_API_KEY=your-openai-key
+ANTHROPIC_API_KEY=your-anthropic-key
+
+# App
+SECRET_KEY=your-secret-key
+DEBUG=False
+```
+
 ### Frontend (.env.local)
+
+**로컬 개발:**
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_MEDIAWIKI_URL=http://localhost:8080
+NEXT_PUBLIC_MEDIAWIKI_URL=http://localhost:5050
+```
+
+**프로덕션:**
+```bash
+NEXT_PUBLIC_API_URL=https://api-wiki.jrai.space
+NEXT_PUBLIC_MEDIAWIKI_URL=https://okidokiwiki.jrai.space
 ```
 
 ---

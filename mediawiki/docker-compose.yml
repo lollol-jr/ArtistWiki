@@ -6,7 +6,7 @@ services:
     container_name: artistwiki-mediawiki
     restart: always
     ports:
-      - "8080:80"
+      - "5050:80"
     environment:
       - MEDIAWIKI_DB_TYPE=postgres
       - MEDIAWIKI_DB_HOST=postgres
