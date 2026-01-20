@@ -61,56 +61,67 @@ ArtistWiki/
 └── README.md
 ```
 
-## 개발 시작하기
+## 빠른 시작
 
-### 사전 요구사항
-- Python 3.11+
-- Node.js 18+
-- Docker & Docker Compose
-- PostgreSQL 15+
+### Docker Compose로 전체 시스템 실행
 
-### 설치 및 실행
-
-1. 저장소 클론
 ```bash
-git clone <repository-url>
-cd ArtistWiki
-```
+# 1. 환경 변수 설정
+cp .env.example .env
+# .env 파일을 편집하여 필수 값 입력 (OPENAI_API_KEY 등)
 
-2. 백엔드 실행
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-3. 프론트엔드 실행
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-4. MediaWiki 실행
-```bash
-cd mediawiki
+# 2. 시스템 시작
 docker-compose up -d
+
+# 3. 접속
+# - Frontend: http://localhost:3000
+# - Backend API: http://localhost:8000/docs
+# - MediaWiki: http://localhost:8080
 ```
 
-## 환경 변수
+**자세한 내용은 [Quick Start Guide](./docs/quick-start.md)를 참조하세요.**
 
-### Backend (.env)
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/artistwiki
-MEDIAWIKI_API_URL=http://localhost:8080/api.php
-OPENAI_API_KEY=your-openai-key
-```
+## 문서
 
-### Frontend (.env.local)
-```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+- 📘 [Quick Start Guide](./docs/quick-start.md) - 빠른 시작 가이드
+- 🏗️ [Architecture](./docs/architecture.md) - 시스템 아키텍처
+- 🤖 [Agent System](./docs/agent-system.md) - 에이전트 시스템 설계
+- 📖 [API Specifications](./docs/api-specs.md) - API 명세
+- 💻 [Development Guide](./docs/development-guide.md) - 개발 가이드
+- 🚀 [Deployment (Dokploy)](./docs/deployment-dokploy.md) - 배포 가이드
+
+## 주요 기능 데모
+
+### 작가 정보 자동 생성
+
+```bash
+curl -X POST "http://localhost:8000/api/v1/agents/jobs" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow": [
+      {
+        "agent_type": "crawler",
+        "task_data": {
+          "url": "https://en.wikipedia.org/wiki/Pablo_Picasso",
+          "artist_name": "Pablo Picasso"
+        }
+      },
+      {
+        "agent_type": "writer",
+        "task_data": {
+          "artist_name": "Pablo Picasso",
+          "artist_type": "painter"
+        }
+      },
+      {
+        "agent_type": "mediawiki",
+        "task_data": {
+          "action": "create",
+          "page_title": "Pablo_Picasso"
+        }
+      }
+    ]
+  }'
 ```
 
 ## 개발 가이드라인
