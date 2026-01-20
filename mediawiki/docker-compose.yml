@@ -3,8 +3,6 @@ version: '3.8'
 services:
   database:
     image: mariadb:11
-    container_name: mw-database
-    hostname: database
     restart: always
     environment:
       MYSQL_DATABASE: mediawiki
@@ -14,10 +12,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      wiki-internal:
-        aliases:
-          - database
-          - mariadb
+      - wiki-internal
 
   mediawiki:
     image: mediawiki:1.45
