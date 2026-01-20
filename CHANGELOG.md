@@ -44,6 +44,28 @@
   - pytz 2023.3 → 2024.2
   - pydantic-extra-types 2.3.0 → 2.10.0
 
+- **AI & LLM** (의존성 충돌 해결)
+  - OpenAI 1.10.0 → 1.66.1
+  - Anthropic 0.9.0 → 0.76.0
+  - LangChain 0.1.0 → 0.3.18
+  - LangChain-OpenAI 0.0.2 → 0.2.14
+  - LangChain-Anthropic 0.1.1 → 0.3.9
+
+### Fixed
+- **의존성 충돌 해결**
+  - anthropic 0.9.0과 langchain-anthropic 0.1.1 버전 충돌 해결
+  - AI 패키지를 최신 호환 버전으로 업데이트
+
+- **설정 파일 수정**
+  - `.env.example` ALLOWED_ORIGINS 형식을 JSON 배열로 수정
+  - Pydantic Settings 2.5.0 호환성 개선
+
+### Tested
+- ✅ Backend 서버 시작 (FastAPI 0.128 + Python 3.11)
+- ✅ Frontend 빌드 (Next.js 14 + Node 24)
+- ✅ Docker Compose 전체 시스템 빌드
+- ✅ 모든 의존성 설치 및 호환성 검증
+
 ### Notes
 - 모든 업데이트는 하위 호환성 유지
 - Breaking changes 없음
