@@ -23,6 +23,8 @@ services:
       - "80"
     volumes:
       - mw_images:/var/www/html/images
+      # LocalSettings.php - 로컬 개발용 (프로덕션에서는 주석 처리)
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
     networks:
       - wiki-internal
       - dokploy-network
