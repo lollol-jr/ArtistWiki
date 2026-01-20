@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.2.0] - 2026-01-21
+
+### Changed - Next.js 15 + React 19 업그레이드
+
+#### Frontend
+- **Next.js 14.1.0 → 15.5.9**
+  - React 19 지원
+  - 보안 취약점 패치 (CVE-2025-66478)
+  - 성능 개선 및 최신 기능
+  - App Router 최적화
+
+- **React 18.2.0 → 19.0.0**
+  - React 19 새로운 기능
+  - 성능 개선
+  - TypeScript 지원 강화
+
+- **eslint-config-next 14.1.0 → 15.5.9**
+  - Next.js 15 호환
+
+- **@types/react 18.2.48 → 19.0.0**
+- **@types/react-dom 18.2.18 → 19.0.0**
+
+### Tested
+- ✅ Next.js 15.5.9 빌드 성공
+- ✅ React 19 호환성 확인
+- ✅ TypeScript 타입 체크 통과
+- ✅ 보안 취약점 0개
+
+### Notes
+- Next.js 15와 React 19는 안정 버전
+- 모든 기존 코드 호환성 유지
+- Breaking changes 없음
+
+---
+
 ## [0.1.1] - 2026-01-21
 
 ### Changed - 안전한 의존성 업데이트
