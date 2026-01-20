@@ -1,19 +1,32 @@
 # MediaWiki Setup
 
-## 시작하기
+## 로컬 개발 환경
 
 1. Docker Compose 실행:
 ```bash
 docker-compose up -d
 ```
 
-2. MediaWiki 접속:
-- URL: http://localhost:5050
-- Admin 계정: admin / admin_password
+2. MediaWiki 설치 마법사 접속:
+- URL: http://localhost:5050/mw-config/index.php
 
-3. LocalSettings.php 설정:
-- 초기 설치 후 생성된 LocalSettings.php 파일을 이 디렉토리에 복사
-- Bot 계정 생성 및 권한 설정
+3. 데이터베이스 설정:
+- Database type: **MySQL**
+- Database host: **database**
+- Database name: **mediawiki**
+- Database username: **mediawiki**
+- Database password: **mediawiki_password**
+
+4. LocalSettings.php 설정:
+- 초기 설치 완료 후 LocalSettings.php 파일 다운로드
+- 이 디렉토리에 저장
+- docker-compose.yml에서 LocalSettings.php 마운트 주석 해제
+- `docker-compose restart` 실행
+
+## 프로덕션 환경 (Dokploy)
+
+- MediaWiki: https://okidokiwiki.jrai.space
+- 설치 후 Bot 계정 생성 및 권한 설정
 
 ## Bot 계정 설정
 

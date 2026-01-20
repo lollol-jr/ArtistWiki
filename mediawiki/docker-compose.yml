@@ -1,47 +1,27 @@
 version: '3.8'
 
 services:
+  database:
+    image: mariadb:11
+    restart: always
+    environment:
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: mediawiki
+      MYSQL_PASSWORD: mediawiki_password
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - db_data:/var/lib/mysql
+
   mediawiki:
     image: mediawiki:1.45
-    container_name: artistwiki-mediawiki
     restart: always
+    depends_on:
+      - database
     ports:
       - "5050:80"
-    environment:
-      - MEDIAWIKI_DB_TYPE=postgres
-      - MEDIAWIKI_DB_HOST=postgres
-      - MEDIAWIKI_DB_NAME=mediawiki
-      - MEDIAWIKI_DB_USER=mediawiki
-      - MEDIAWIKI_DB_PASSWORD=mediawiki_password
-      - MEDIAWIKI_SITE_NAME=ArtistWiki
-      - MEDIAWIKI_SITE_LANG=ko
-      - MEDIAWIKI_ADMIN_USER=admin
-      - MEDIAWIKI_ADMIN_PASS=admin_password
     volumes:
-      - mediawiki_images:/var/www/html/images
-      - ./LocalSettings.php:/var/www/html/LocalSettings.php
-    depends_on:
-      - postgres
-    networks:
-      - artistwiki
-
-  postgres:
-    image: postgres:17
-    container_name: artistwiki-mediawiki-db
-    restart: always
-    environment:
-      - POSTGRES_DB=mediawiki
-      - POSTGRES_USER=mediawiki
-      - POSTGRES_PASSWORD=mediawiki_password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - artistwiki
+      - mw_images:/var/www/html/images
 
 volumes:
-  mediawiki_images:
-  postgres_data:
-
-networks:
-  artistwiki:
-    driver: bridge
+  db_data:
+  mw_images:
