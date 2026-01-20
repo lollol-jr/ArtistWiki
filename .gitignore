@@ -64,6 +64,7 @@ logs/
 mediawiki/images/
 mediawiki/cache/
 mediawiki/data/
+mediawiki/LocalSettings.php
 
 # Docker
 .docker/

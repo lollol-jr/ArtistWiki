@@ -61,7 +61,8 @@ $wgDBtype = "mysql";
 $wgDBserver = "database";
 $wgDBname = "mediawiki";
 $wgDBuser = "mediawiki";
-$wgDBpassword = getenv('MW_DB_PASSWORD') ?: "mediawiki_password";
+# IMPORTANT: Set MW_DB_PASSWORD environment variable
+$wgDBpassword = getenv('MW_DB_PASSWORD');
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -103,14 +104,16 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = getenv('MW_SECRET_KEY') ?: "73861deaa453b9a835d86856b8bb3c34574d70a9a659fa4504b8a6c86f2aeab4";
+# IMPORTANT: Set MW_SECRET_KEY environment variable (generate random 64-char hex string)
+$wgSecretKey = getenv('MW_SECRET_KEY');
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = getenv('MW_UPGRADE_KEY') ?: "a4f5f705a3ac0ecf";
+# IMPORTANT: Set MW_UPGRADE_KEY environment variable (generate random 16-char hex string)
+$wgUpgradeKey = getenv('MW_UPGRADE_KEY');
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation

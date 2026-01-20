@@ -70,14 +70,26 @@ ArtistWiki/
 cp .env.example .env
 # .env 파일을 편집하여 필수 값 입력 (OPENAI_API_KEY 등)
 
-# 2. 시스템 시작
+# 2. MediaWiki LocalSettings.php 설정
+cp mediawiki/LocalSettings.php.example mediawiki/LocalSettings.php
+
+# 3. .env 파일에서 MediaWiki 환경변수 설정
+# - MW_DB_PASSWORD: MediaWiki 데이터베이스 비밀번호
+# - MW_SECRET_KEY: 64자리 랜덤 hex 문자열 (openssl rand -hex 32)
+# - MW_UPGRADE_KEY: 16자리 랜덤 hex 문자열 (openssl rand -hex 8)
+
+# 4. 시스템 시작
 docker-compose up -d
 
-# 3. 접속 (로컬 개발)
+# 5. 접속 (로컬 개발)
 # - Frontend: http://localhost:3000
 # - Backend API: http://localhost:8000/docs
-# - MediaWiki: http://localhost:5050
+# - MediaWiki: http://localhost:8080
 ```
+
+### LocalSettings.php 보안 참고
+
+`mediawiki/LocalSettings.php` 파일은 민감한 정보를 포함하므로 Git에 포함되지 않습니다. 초기 설정 시 `LocalSettings.php.example`을 복사하여 사용하세요.
 
 ### 프로덕션 환경
 - **Frontend**: https://wiki.jrai.space

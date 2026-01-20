@@ -77,6 +77,9 @@ services:
       - MEDIAWIKI_SITE_LANG=ko
       - MEDIAWIKI_ADMIN_USER=admin
       - MEDIAWIKI_ADMIN_PASS=admin_password
+      - MW_DB_PASSWORD=${MW_DB_PASSWORD}
+      - MW_SECRET_KEY=${MW_SECRET_KEY}
+      - MW_UPGRADE_KEY=${MW_UPGRADE_KEY}
     volumes:
       - mediawiki_images:/var/www/html/images
       - ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php:ro
