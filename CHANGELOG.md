@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.3.0] - 2026-01-21
+
+### Changed - AI 패키지 메이저 업그레이드
+
+#### Backend - AI & LLM
+- **OpenAI 1.66.1 → 2.15.0**
+  - 메이저 버전 업그레이드 (v2 API)
+  - 최신 기능 지원
+
+- **LangChain 0.3.18 → 1.2.6**
+  - 메이저 버전 업그레이드 (v1.x stable)
+  - 안정성 및 성능 개선
+
+- **LangChain-OpenAI 0.2.14 → 1.1.7**
+  - LangChain v1 호환
+
+- **LangChain-Anthropic 0.3.9 → 1.3.1**
+  - LangChain v1 호환
+
+#### 추가 설치된 패키지
+- **LangGraph 1.0.6** - 그래프 기반 AI 워크플로우
+- **LangGraph-Checkpoint 4.0.0** - 워크플로우 체크포인트
+- **LangGraph-Prebuilt 1.0.6** - 사전 구성 워크플로우
+- **LangGraph-SDK 0.3.3** - SDK 지원
+
+### Tested
+- ✅ FastAPI 서버 정상 시작
+- ✅ AI 패키지 호환성 확인
+- ✅ 모든 의존성 설치 성공
+
+### Notes
+- 모든 LangChain 패키지가 v1.x stable로 업그레이드
+- OpenAI v2 API 호환
+- 에이전트 시스템 성능 개선 예상
+
+---
+
 ## [0.2.0] - 2026-01-21
 
 ### Changed - Next.js 15 + React 19 업그레이드
