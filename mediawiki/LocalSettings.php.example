@@ -149,8 +149,8 @@ wfLoadExtension( 'CheckUser' );
 wfLoadExtension( 'Cite' );
 wfLoadExtension( 'CiteThisPage' );
 wfLoadExtension( 'ConfirmEdit' );
-wfLoadExtension( 'DiscussionTools' );
-wfLoadExtension( 'LoginNotify' );
+# wfLoadExtension( 'DiscussionTools' ); # Requires VisualEditor and Linter
+# wfLoadExtension( 'LoginNotify' ); # Requires Echo
 wfLoadExtension( 'OATHAuth' );
 wfLoadExtension( 'PageImages' );
 wfLoadExtension( 'PdfHandler' );
