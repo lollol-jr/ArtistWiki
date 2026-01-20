@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: artistwiki-db
+    restart: always
+    environment:
+      - POSTGRES_DB=artistwiki
+      - POSTGRES_USER=artistwiki_user
+      - POSTGRES_PASSWORD=artistwiki_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - artistwiki
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: artistwiki-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://artistwiki_user:artistwiki_password@postgres:5432/artistwiki
+      - MEDIAWIKI_API_URL=http://mediawiki/api.php
+      - MEDIAWIKI_BOT_USERNAME=${MEDIAWIKI_BOT_USERNAME}
+      - MEDIAWIKI_BOT_PASSWORD=${MEDIAWIKI_BOT_PASSWORD}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=True
+    depends_on:
+      - postgres
+      - mediawiki
+    volumes:
+      - ./backend:/app
+    networks:
+      - artistwiki
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: artistwiki-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_MEDIAWIKI_URL=http://localhost:8080
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - artistwiki
+
+  mediawiki:
+    image: mediawiki:1.45
+    container_name: artistwiki-mediawiki
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - MEDIAWIKI_DB_TYPE=postgres
+      - MEDIAWIKI_DB_HOST=mediawiki-db
+      - MEDIAWIKI_DB_NAME=mediawiki
+      - MEDIAWIKI_DB_USER=mediawiki
+      - MEDIAWIKI_DB_PASSWORD=mediawiki_password
+      - MEDIAWIKI_SITE_NAME=ArtistWiki
+      - MEDIAWIKI_SITE_LANG=ko
+      - MEDIAWIKI_ADMIN_USER=admin
+      - MEDIAWIKI_ADMIN_PASS=admin_password
+    volumes:
+      - mediawiki_images:/var/www/html/images
+      - ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php:ro
+    depends_on:
+      - mediawiki-db
+    networks:
+      - artistwiki
+
+  mediawiki-db:
+    image: postgres:17
+    container_name: artistwiki-mediawiki-db
+    restart: always
+    environment:
+      - POSTGRES_DB=mediawiki
+      - POSTGRES_USER=mediawiki
+      - POSTGRES_PASSWORD=mediawiki_password
+    volumes:
+      - mediawiki_postgres_data:/var/lib/postgresql/data
+    networks:
+      - artistwiki
+
+volumes:
+  postgres_data:
+  mediawiki_images:
+  mediawiki_postgres_data:
+
+networks:
+  artistwiki:
+    driver: bridge
